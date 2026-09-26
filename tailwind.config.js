@@ -12,16 +12,44 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Inter', ...defaultTheme.fontFamily.sans],
             },
+
             colors: {
-                teal: {
-                    850: '#115e59',
+                /* Primary palette - government / corporate teal */
+                primary: {
+                    DEFAULT: '#0F766E',
+                    50: '#F0FDFA',
+                    100: '#CCFBF1',
+                    200: '#99F6E4',
+                    300: '#5EEAD4',
+                    400: '#2DD4BF',
+                    500: '#14B8A6',
+                    600: '#0D9488',
+                    700: '#0F766E',
+                    800: '#115E59',
+                    900: '#134E4A',
+                    950: '#042F2E',
                 },
+                /* Surface tokens */
+                canvas: '#F8FAFC',
+                surface: '#FFFFFF',
             },
+
+            borderRadius: {
+                input: '8px',
+                button: '8px',
+                card: '12px',
+                modal: '12px',
+                badge: '6px',
+            },
+
             boxShadow: {
-                xs: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+                card: '0 1px 2px 0 rgb(15 23 42 / 0.05), 0 1px 3px 0 rgb(15 23 42 / 0.10)',
+                'card-hover': '0 4px 10px -2px rgb(15 23 42 / 0.10), 0 2px 6px -2px rgb(15 23 42 / 0.08)',
+                xs: '0 1px 2px 0 rgb(15 23 42 / 0.05)',
             },
+
             scale: {
                 98: '0.98',
             },

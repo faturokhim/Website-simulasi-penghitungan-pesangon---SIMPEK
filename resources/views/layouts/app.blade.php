@@ -1,58 +1,68 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full bg-slate-50">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>SIMPEK - {{ config('app.name', 'Kalkulator Hak Pesangon & PHK') }}</title>
+        <title>@yield('title', config('app.name', 'SIMPEK')) &mdash; Kalkulator Hak Pesangon &amp; PHK</title>
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:300,400,500,600,700,800&display=swap" rel="stylesheet" />
+        <link href="https://fonts.bunny.net/css?family=inter:300,400,500,600,700,800&display=swap" rel="stylesheet" />
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        <style>
-            [x-cloak] { display: none !important; }
-        </style>
+        <style>[x-cloak] { display: none !important; }</style>
     </head>
-    <body class="font-sans antialiased text-slate-800 bg-slate-50 min-h-full flex flex-col selection:bg-teal-500 selection:text-white">
-        <div class="min-h-screen flex flex-col flex-1">
-            @include('layouts.navigation')
+    <body class="flex min-h-full flex-col font-sans text-slate-800 selection:bg-primary-100 selection:text-primary-900">
+        @php
+            $withSidebar = request()->routeIs('admin.*');
+        @endphp
 
-            <!-- Page Heading -->
-            @hasSection('header')
-                <header class="bg-white/70 backdrop-blur-sm border-b border-slate-200/80">
-                    <div class="max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:px-8">
-                        @yield('header')
-                    </div>
-                </header>
+        <x-app-navbar :sidebar="$withSidebar" />
+
+        @hasSection('header')
+            <header class="border-b border-slate-200 bg-surface">
+                <div class="page-container py-5">
+                    @yield('header')
+                </div>
+            </header>
+        @endif
+
+        <div class="flex flex-1 items-stretch">
+            @if ($withSidebar)
+                <x-sidebar />
             @endif
 
-            <main class="flex-1 max-w-7xl w-full mx-auto py-6 sm:py-8 px-4 sm:px-6 lg:px-8">
-                @if(session('success'))
-                    <div class="mb-6 flex items-start gap-3 p-4 bg-teal-50 border border-teal-200/80 rounded-2xl text-teal-900 shadow-sm" role="alert">
-                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-teal-600 text-white flex items-center justify-center text-xs font-bold">✓</span>
-                        <div class="flex-1 text-sm font-medium">
-                            {{ session('success') }}
+            <main id="content" class="min-w-0 flex-1 py-6 sm:py-8">
+                <div class="page-container">
+                    @if (session('success'))
+                        <div class="mb-6">
+                            <x-alert type="success" :dismissible="true">{{ session('success') }}</x-alert>
                         </div>
-                    </div>
-                @endif
-                @if(session('error'))
-                    <div class="mb-6 flex items-start gap-3 p-4 bg-rose-50 border border-rose-200/80 rounded-2xl text-rose-900 shadow-sm" role="alert">
-                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-rose-600 text-white flex items-center justify-center text-xs font-bold">!</span>
-                        <div class="flex-1 text-sm font-medium">
-                            {{ session('error') }}
+                    @endif
+
+                    @if (session('error'))
+                        <div class="mb-6">
+                            <x-alert type="error" :dismissible="true">{{ session('error') }}</x-alert>
                         </div>
-                    </div>
-                @endif
+                    @endif
 
-                @yield('content')
-                {{ $slot ?? '' }}
-            </main>
+                    @hasSection('breadcrumb')
+                        <div class="mb-4">
+                            @yield('breadcrumb')
+                        </div>
+                    @endif
 
-            <footer class="mt-auto border-t border-slate-200/80 bg-white/70 py-6 text-center text-xs text-slate-500">
-                <div class="max-w-7xl mx-auto px-4">
-                    SIMPEK &copy; {{ date('Y') }} &bull; Sistem Informasi Penghitungan Kompensasi PHK Ketenagakerjaan sesuai PP No. 35/2021 & UU No. 6/2023.
+                    @yield('content')
+                    {{ $slot ?? '' }}
                 </div>
-            </footer>
+            </main>
         </div>
+
+        <footer class="border-t border-slate-200 bg-surface py-6">
+            <div class="page-container flex flex-col items-center justify-between gap-2 text-xs text-slate-500 sm:flex-row">
+                <span>SIMPEK &copy; {{ date('Y') }}</span>
+                <span>Sesuai UU No. 6 Tahun 2023 &amp; PP No. 35 Tahun 2021</span>
+            </div>
+        </footer>
+
         @stack('scripts')
     </body>
 </html>

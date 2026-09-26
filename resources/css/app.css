@@ -5,35 +5,51 @@
 @layer base {
     html {
         -webkit-text-size-adjust: 100%;
+        font-size: 15px;
+        scroll-behavior: smooth;
     }
+
     body {
+        @apply bg-canvas text-slate-800 antialiased;
         text-rendering: optimizeLegibility;
+        line-height: 1.5;
     }
-    /* Tautan dan tombol keyboard tetap terlihat */
+
+    /* Visible, consistent keyboard focus on every interactive element */
     a:focus-visible,
     button:focus-visible,
     input:focus-visible,
     select:focus-visible,
-    textarea:focus-visible {
+    textarea:focus-visible,
+    [tabindex]:focus-visible {
         outline: 2px solid #0f766e;
         outline-offset: 2px;
+        border-radius: 4px;
     }
-    /* Angka rupiah tidak pecah baris aneh */
+
+    /* Rupiah figures must never wrap mid-number */
     .tabular {
         font-variant-numeric: tabular-nums;
     }
 }
 
 @layer components {
-    /* Header tabel yang konsisten dan terbaca */
+    /* Shared table chrome - one shell, one header style, everywhere */
     .table-shell {
-        @apply bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden;
+        @apply bg-surface rounded-card border border-slate-200 shadow-card overflow-hidden;
     }
+
     .table-head {
-        @apply bg-slate-100 text-slate-700 font-bold uppercase tracking-wide;
+        @apply bg-slate-50 text-slate-600 uppercase tracking-wide;
     }
-    /* Badge status dengan kontras aman (teks gelap di atas pastel) */
+
+    /* Status badge - dark text on a light tinted background */
     .badge {
-        @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold border whitespace-nowrap;
+        @apply inline-flex items-center gap-1 rounded-badge border px-2 py-0.5 text-xs font-semibold whitespace-nowrap;
+    }
+
+    /* Standard page container: centered, capped, padded */
+    .page-container {
+        @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
     }
 }
