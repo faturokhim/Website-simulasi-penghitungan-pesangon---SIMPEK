@@ -1,21 +1,18 @@
 @extends('layouts.app')
 
 @section('header')
-    <div>
-        <p class="text-xs font-bold text-teal-800 uppercase tracking-wide">Akun Anda</p>
-        <h1 class="text-2xl font-extrabold text-slate-900 tracking-tight">Profil</h1>
-    </div>
+    <x-page-header eyebrow="Akun Anda" title="Profil" />
 @endsection
 
 @section('content')
 <div class="max-w-lg mx-auto">
-    <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8">
+    <div class="bg-white rounded-card border border-slate-200 shadow-card p-6 sm:p-8">
         <div class="flex items-center gap-4 pb-5 border-b border-slate-100">
-            <div class="w-12 h-12 rounded-2xl bg-teal-700 text-white flex items-center justify-center text-xl font-extrabold" aria-hidden="true">
+            <div class="w-12 h-12 rounded-card bg-primary-700 text-white flex items-center justify-center text-xl font-bold" aria-hidden="true">
                 {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
             </div>
             <div>
-                <p class="text-lg font-extrabold text-slate-900">{{ Auth::user()->name }}</p>
+                <p class="text-lg font-bold text-slate-900">{{ Auth::user()->name }}</p>
                 <p class="text-sm text-slate-600">{{ Auth::user()->email }}</p>
             </div>
         </div>
@@ -23,7 +20,7 @@
             <div class="flex items-center justify-between gap-3">
                 <dt class="font-semibold text-slate-600">Peran</dt>
                 <dd>
-                    <span class="badge @if(Auth::user()->role === 'admin') bg-teal-700 text-white border-teal-700 @else bg-slate-800 text-white border-slate-800 @endif">
+                    <span class="badge @if(Auth::user()->role === 'admin') bg-primary-700 text-white border-primary-700 @else bg-slate-800 text-white border-slate-800 @endif">
                         {{ Auth::user()->role === 'admin' ? 'Admin' : 'Pekerja' }}
                     </span>
                 </dd>
@@ -38,7 +35,7 @@
             </div>
         </dl>
         <div class="mt-6 pt-5 border-t border-slate-100 flex flex-wrap gap-2">
-            <a href="{{ route('user.calculator') }}" class="inline-flex items-center px-4 py-2.5 bg-teal-700 hover:bg-teal-800 text-white text-sm font-bold rounded-xl transition">Hitung Pesangon</a>
+            <x-button href="{{ route('user.calculator') }}" variant="primary" size="md" icon="calculator">Hitung Pesangon</x-button>
             <a href="{{ route('user.history') }}" class="inline-flex items-center px-4 py-2.5 border border-slate-300 text-slate-800 text-sm font-bold rounded-xl hover:bg-slate-100 transition">Riwayat Saya</a>
         </div>
     </div>

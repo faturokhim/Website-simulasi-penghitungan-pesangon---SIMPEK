@@ -11,49 +11,45 @@
         <style>[x-cloak] { display: none !important; }</style>
     </head>
     <body class="flex min-h-full flex-col font-sans text-slate-800 selection:bg-primary-100 selection:text-primary-900">
-        @php
-            $withSidebar = request()->routeIs('admin.*');
-        @endphp
-
-        <x-app-navbar :sidebar="$withSidebar" />
-
-        @hasSection('header')
-            <header class="border-b border-slate-200 bg-surface">
-                <div class="page-container py-5">
-                    @yield('header')
-                </div>
-            </header>
-        @endif
+        {{-- Navigation lives in the sidebar only; the top bar carries brand + account actions. --}}
+        <x-app-navbar :sidebar="true" />
 
         <div class="flex flex-1 items-stretch">
-            @if ($withSidebar)
-                <x-sidebar />
-            @endif
+            <x-sidebar />
 
-            <main id="content" class="min-w-0 flex-1 py-6 sm:py-8">
-                <div class="page-container">
-                    @if (session('success'))
-                        <div class="mb-6">
-                            <x-alert type="success" :dismissible="true">{{ session('success') }}</x-alert>
+            <div class="flex min-w-0 flex-1 flex-col">
+                @hasSection('header')
+                    <header class="border-b border-slate-200 bg-surface">
+                        <div class="page-container py-5">
+                            @hasSection('breadcrumb')
+                                <div class="mb-3">
+                                    @yield('breadcrumb')
+                                </div>
+                            @endif
+                            @yield('header')
                         </div>
-                    @endif
+                    </header>
+                @endif
 
-                    @if (session('error'))
-                        <div class="mb-6">
-                            <x-alert type="error" :dismissible="true">{{ session('error') }}</x-alert>
-                        </div>
-                    @endif
+                <main id="content" class="min-w-0 flex-1 py-6 sm:py-8">
+                    <div class="page-container">
+                        @if (session('success'))
+                            <div class="mb-6">
+                                <x-alert type="success" :dismissible="true">{{ session('success') }}</x-alert>
+                            </div>
+                        @endif
 
-                    @hasSection('breadcrumb')
-                        <div class="mb-4">
-                            @yield('breadcrumb')
-                        </div>
-                    @endif
+                        @if (session('error'))
+                            <div class="mb-6">
+                                <x-alert type="error" :dismissible="true">{{ session('error') }}</x-alert>
+                            </div>
+                        @endif
 
-                    @yield('content')
-                    {{ $slot ?? '' }}
-                </div>
-            </main>
+                        @yield('content')
+                        {{ $slot ?? '' }}
+                    </div>
+                </main>
+            </div>
         </div>
 
         <footer class="border-t border-slate-200 bg-surface py-6">

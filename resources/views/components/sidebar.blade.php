@@ -1,10 +1,16 @@
+@props([
+    'role' => null,
+])
+
 @php
-    $items = simpek_nav_items('admin');
+    $role = $role ?? (Auth::user()?->isAdmin() ? 'admin' : 'user');
+    $items = simpek_nav_items($role);
+    $heading = $role === 'admin' ? 'Menu Admin' : 'Menu Utama';
 @endphp
 
-<aside class="hidden w-64 shrink-0 border-e border-slate-200 bg-surface lg:block" aria-label="Navigasi admin">
+<aside class="hidden w-64 shrink-0 border-e border-slate-200 bg-surface md:block" aria-label="Navigasi utama">
     <div class="sticky top-16 max-h-[calc(100vh-4rem)] overflow-y-auto px-3 py-5">
-        <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-slate-400">Menu Admin</p>
+        <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-slate-400">{{ $heading }}</p>
 
         <nav class="space-y-1">
             @foreach ($items as $item)

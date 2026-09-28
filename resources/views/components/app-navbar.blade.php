@@ -8,23 +8,25 @@
     $isAdmin = $user->isAdmin();
 @endphp
 
-<header class="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur-sm">
+<header class="sticky top-0 z-40 border-b border-slate-200 bg-white">
     <div class="page-container">
         <div class="flex h-16 items-center justify-between gap-4">
             <div class="flex min-w-0 items-center gap-6">
                 <x-brand size="md" />
 
-                <nav class="hidden items-center gap-1 md:flex {{ $sidebar ? 'lg:hidden' : '' }}"
-                     aria-label="Navigasi utama">
-                    @foreach ($items as $item)
-                        <a href="{{ route($item['route']) }}"
-                           class="inline-flex items-center gap-1.5 rounded-button px-3 py-2 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-primary {{ request()->routeIs($item['match']) ? 'bg-primary-700 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}"
-                           @if (request()->routeIs($item['match'])) aria-current="page" @endif>
-                            <x-icon :name="$item['icon']" :size="16" />
-                            <span class="hidden lg:inline">{{ $item['label'] }}</span>
-                        </a>
-                    @endforeach
-                </nav>
+                @unless ($sidebar)
+                    <nav class="hidden items-center gap-1 md:flex"
+                         aria-label="Navigasi utama">
+                        @foreach ($items as $item)
+                            <a href="{{ route($item['route']) }}"
+                               class="inline-flex items-center gap-1.5 rounded-button px-3 py-2 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-primary {{ request()->routeIs($item['match']) ? 'bg-primary-700 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}"
+                               @if (request()->routeIs($item['match'])) aria-current="page" @endif>
+                                <x-icon :name="$item['icon']" :size="16" />
+                                <span class="hidden lg:inline">{{ $item['label'] }}</span>
+                            </a>
+                        @endforeach
+                    </nav>
+                @endunless
             </div>
 
             <div class="flex items-center gap-2 sm:gap-3">

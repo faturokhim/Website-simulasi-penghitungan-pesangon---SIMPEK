@@ -4,13 +4,13 @@
 
 @php
     $navItems = [
-        ['label' => 'Fitur Sistem', 'href' => route('home') . '#fitur'],
-        ['label' => '23 Alasan PHK', 'href' => route('home') . '#skenario'],
-        ['label' => 'Dasar Hukum', 'href' => route('home') . '#regulasi'],
+        ['label' => 'Fitur Sistem', 'href' => route('home') . '#fitur', 'icon' => 'layers'],
+        ['label' => '23 Alasan PHK', 'href' => route('home') . '#skenario', 'icon' => 'clipboard-list'],
+        ['label' => 'Dasar Hukum', 'href' => route('home') . '#regulasi', 'icon' => 'scale'],
     ];
 @endphp
 
-<header class="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur-sm">
+<header class="sticky top-0 z-40 border-b border-slate-200 bg-white">
     <div class="page-container">
         <div class="flex h-16 items-center justify-between gap-4">
             <x-brand size="md" />

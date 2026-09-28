@@ -1,11 +1,7 @@
 @extends('layouts.app')
 
 @section('header')
-    <div>
-        <p class="text-xs font-bold text-teal-800 uppercase tracking-wide">Referensi peraturan</p>
-        <h1 class="text-2xl font-extrabold text-slate-900 tracking-tight">Data Peraturan</h1>
-        <p class="text-sm text-slate-600 mt-0.5">Acuan pasal yang dipakai sebagai dasar hitungan.</p>
-    </div>
+    <x-page-header eyebrow="Referensi peraturan" title="Data Peraturan" description="Acuan pasal yang dipakai sebagai dasar hitungan." />
 @endsection
 
 @section('content')
@@ -24,7 +20,7 @@
             </thead>
             <tbody class="divide-y divide-slate-100">
                 @forelse($regulations as $reg)
-                <tr class="hover:bg-teal-50/50">
+                <tr class="hover:bg-primary-50/50">
                     <td class="px-6 py-4 font-semibold text-slate-900">{{ $reg->name }}</td>
                     <td class="px-6 py-4 text-slate-700">{{ $reg->number }}</td>
                     <td class="px-6 py-4 text-slate-700">{{ $reg->year }}</td>
@@ -35,7 +31,7 @@
                         </span>
                     </td>
                     <td class="px-6 py-4 text-center whitespace-nowrap">
-                        <button class="px-2.5 py-1.5 text-xs font-bold text-teal-900 hover:underline underline-offset-2">Ubah</button>
+                        <button class="px-2.5 py-1.5 text-xs font-bold text-primary-900 hover:underline underline-offset-2">Ubah</button>
                         <button class="px-2.5 py-1.5 text-xs font-bold text-red-800 hover:underline underline-offset-2">Hapus</button>
                     </td>
                 </tr>

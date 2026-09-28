@@ -37,6 +37,16 @@ export default {
             },
 
             borderRadius: {
+                /* Spec: input/button 8px, card/modal 12px, badge 6px.
+                   The numeric scale is capped at 12px so legacy rounded-2xl/3xl
+                   classes also land on the design-system radius. */
+                sm: '4px',
+                DEFAULT: '4px',
+                md: '6px',
+                lg: '8px',
+                xl: '8px',
+                '2xl': '12px',
+                '3xl': '12px',
                 input: '8px',
                 button: '8px',
                 card: '12px',

@@ -1,11 +1,7 @@
 @extends('layouts.app')
 
 @section('header')
-    <div>
-        <p class="text-xs font-bold text-teal-800 uppercase tracking-wide">Kelola akses</p>
-        <h1 class="text-2xl font-extrabold text-slate-900 tracking-tight">Data Pengguna</h1>
-        <p class="text-sm text-slate-600 mt-0.5">Ubah peran atau nonaktifkan akun bila perlu.</p>
-    </div>
+    <x-page-header eyebrow="Kelola akses" title="Data Pengguna" description="Ubah peran atau nonaktifkan akun bila perlu." />
 @endsection
 
 @section('content')
@@ -23,11 +19,11 @@
             </thead>
             <tbody class="divide-y divide-slate-100">
                 @forelse($users as $user)
-                <tr class="hover:bg-teal-50/50">
+                <tr class="hover:bg-primary-50/50">
                     <td class="px-6 py-4 font-semibold text-slate-900">{{ $user->name }}</td>
                     <td class="px-6 py-4 text-slate-700">{{ $user->email }}</td>
                     <td class="px-6 py-4 text-center">
-                        <span class="badge @if($user->role === 'admin') bg-teal-700 text-white border-teal-700 @else bg-slate-800 text-white border-slate-800 @endif">
+                        <span class="badge @if($user->role === 'admin') bg-primary-700 text-white border-primary-700 @else bg-slate-800 text-white border-slate-800 @endif">
                             {{ $user->role === 'admin' ? 'Admin' : 'Pekerja' }}
                         </span>
                     </td>
@@ -40,16 +36,16 @@
                         <form action="{{ route('admin.users.update', $user->id) }}" method="POST" class="inline-flex flex-wrap items-center justify-center gap-1.5">
                             @csrf @method('PUT')
                             <label class="sr-only" for="role-{{ $user->id }}">Peran {{ $user->name }}</label>
-                            <select id="role-{{ $user->id }}" name="role" class="text-xs font-semibold border border-slate-300 rounded-lg px-2 py-1.5 bg-white focus:ring-2 focus:ring-teal-600">
+                            <select id="role-{{ $user->id }}" name="role" class="text-xs font-semibold border border-slate-300 rounded-input px-2 py-1.5 bg-white focus:ring-2 focus:ring-primary">
                                 <option value="user" {{ $user->role === 'user' ? 'selected' : '' }}>Pekerja</option>
                                 <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Admin</option>
                             </select>
                             <label class="sr-only" for="status-{{ $user->id }}">Status {{ $user->name }}</label>
-                            <select id="status-{{ $user->id }}" name="status" class="text-xs font-semibold border border-slate-300 rounded-lg px-2 py-1.5 bg-white focus:ring-2 focus:ring-teal-600">
+                            <select id="status-{{ $user->id }}" name="status" class="text-xs font-semibold border border-slate-300 rounded-input px-2 py-1.5 bg-white focus:ring-2 focus:ring-primary">
                                 <option value="active" {{ $user->status === 'active' ? 'selected' : '' }}>Aktif</option>
                                 <option value="inactive" {{ $user->status === 'inactive' ? 'selected' : '' }}>Nonaktif</option>
                             </select>
-                            <button type="submit" class="px-3 py-1.5 text-xs font-bold text-white bg-teal-700 rounded-lg hover:bg-teal-800">Simpan</button>
+                            <x-button type="submit" variant="primary" size="xs" icon="save">Simpan</x-button>
                         </form>
                     </td>
                 </tr>

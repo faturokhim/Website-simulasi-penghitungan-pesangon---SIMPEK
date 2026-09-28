@@ -15,7 +15,10 @@
         'outline' => 'bg-transparent text-primary border-primary-700 hover:bg-primary-50',
         'ghost' => 'bg-transparent text-slate-600 border-transparent hover:bg-slate-100 hover:text-slate-900',
         'danger' => 'bg-rose-600 text-white border-transparent hover:bg-rose-700 shadow-xs',
+        'success' => 'bg-emerald-700 text-white border-transparent hover:bg-emerald-800 shadow-xs',
+        'warning' => 'bg-amber-600 text-white border-transparent hover:bg-amber-700 shadow-xs',
         'dark' => 'bg-slate-900 text-white border-transparent hover:bg-slate-800 shadow-xs',
+        'light' => 'bg-white text-primary-800 border-transparent hover:bg-primary-50 shadow-xs',
     ];
 
     $sizes = [

@@ -1,11 +1,7 @@
 @extends('layouts.app')
 
 @section('header')
-    <div>
-        <p class="text-xs font-bold text-teal-800 uppercase tracking-wide">Rekap dan unduhan</p>
-        <h1 class="text-2xl font-extrabold text-slate-900 tracking-tight">Laporan Penghitungan</h1>
-        <p class="text-sm text-slate-600 mt-0.5">Daftar hasil untuk arsip dan lampiran dokumen.</p>
-    </div>
+    <x-page-header eyebrow="Rekap dan unduhan" title="Laporan Penghitungan" description="Daftar hasil untuk arsip dan lampiran dokumen." />
 @endsection
 
 @section('content')
@@ -24,7 +20,7 @@
             </thead>
             <tbody class="divide-y divide-slate-100">
                 @forelse($calculations as $calc)
-                <tr class="hover:bg-teal-50/50">
+                <tr class="hover:bg-primary-50/50">
                     <td class="px-6 py-4 font-semibold text-slate-900">{{ $calc->employee_name }}</td>
                     <td class="px-6 py-4 text-slate-700 whitespace-nowrap">{{ $calc->created_at->format('d/m/Y') }}</td>
                     <td class="px-6 py-4 text-slate-700">{{ $calc->terminationReason->name ?? '-' }}</td>
@@ -35,7 +31,7 @@
                         </span>
                     </td>
                     <td class="px-6 py-4 text-center whitespace-nowrap">
-                        <a href="#" class="px-2.5 py-1.5 text-xs font-bold text-teal-900 bg-teal-50 border border-teal-300 rounded-lg hover:bg-teal-100">PDF</a>
+                        <a href="#" class="px-2.5 py-1.5 text-xs font-bold text-primary-900 bg-primary-50 border border-primary-300 rounded-lg hover:bg-primary-100">PDF</a>
                         <a href="#" class="px-2.5 py-1.5 text-xs font-bold text-slate-700 underline underline-offset-2 hover:text-slate-900">Excel</a>
                     </td>
                 </tr>

@@ -1,14 +1,13 @@
 @extends('layouts.app')
 
 @section('header')
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-        <div>
-            <p class="text-xs font-bold text-teal-800 uppercase tracking-wide">Acuan rumus</p>
-            <h1 class="text-2xl font-extrabold text-slate-900 tracking-tight">Aturan Penghitungan</h1>
-            <p class="text-sm text-slate-600 mt-0.5">Pengali UP dan UPMK per alasan PHK. Perubahan di sini dipakai hitungan berikutnya.</p>
-        </div>
-        <button class="inline-flex items-center justify-center px-5 py-2.5 bg-teal-700 hover:bg-teal-800 text-white text-sm font-bold rounded-xl shadow-sm transition">+ Tambah Aturan</button>
-    </div>
+    <x-page-header eyebrow="Acuan rumus" title="Aturan Penghitungan" description="Pengali UP dan UPMK per alasan PHK. Perubahan di sini dipakai hitungan berikutnya.">
+        <x-slot name="actions">
+            <x-button type="button" variant="primary" size="md" icon="plus">
+                Tambah Aturan
+            </x-button>
+        </x-slot>
+    </x-page-header>
 @endsection
 
 @section('content')
@@ -28,9 +27,9 @@
             </thead>
             <tbody class="divide-y divide-slate-100">
                 @forelse($rules as $rule)
-                <tr class="hover:bg-teal-50/50">
+                <tr class="hover:bg-primary-50/50">
                     <td class="px-6 py-4 font-semibold text-slate-900">{{ $rule->terminationReason->name ?? '-' }}</td>
-                    <td class="px-6 py-4 text-right font-bold text-teal-900 tabular">{{ $rule->severance_multiplier ?? '-' }}x</td>
+                    <td class="px-6 py-4 text-right font-bold text-primary-900 tabular">{{ $rule->severance_multiplier ?? '-' }}x</td>
                     <td class="px-6 py-4 text-right font-bold text-slate-900 tabular">{{ $rule->upmk_multiplier ?? '-' }}x</td>
                     <td class="px-6 py-4 text-xs text-slate-600">{{ $rule->uph_rule ?? '-' }}</td>
                     <td class="px-6 py-4 text-slate-700">{{ $rule->rule_version ?? '-' }}</td>
@@ -42,7 +41,7 @@
                         @endif
                     </td>
                     <td class="px-6 py-4 text-center whitespace-nowrap">
-                        <button class="px-2.5 py-1.5 text-xs font-bold text-teal-900 hover:underline underline-offset-2">Ubah</button>
+                        <button class="px-2.5 py-1.5 text-xs font-bold text-primary-900 hover:underline underline-offset-2">Ubah</button>
                         <button class="px-2.5 py-1.5 text-xs font-bold text-red-800 hover:underline underline-offset-2">Hapus</button>
                     </td>
                 </tr>
